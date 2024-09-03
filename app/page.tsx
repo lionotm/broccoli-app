@@ -1,20 +1,16 @@
 'use client'
 
-import { useState } from 'react'
-// import Popup from "../components/Popup";
+import InvitationForm from '@/components/invite-form'
 
 export default function Home() {
-  const [isPopupOpen, setIsPopupOpen] = useState(false)
-
   return (
     <div className='flex flex-col min-h-screen'>
-      {/* {isPopupOpen && <Popup setIsPopupOpen={setIsPopupOpen} />} */}
       <main className='flex-grow flex flex-col items-center justify-center p-4'>
-        <h1 className='text-4xl mb-2'>Welcome to our site</h1>
-        <p className='mb-4'>Enter your name and email to receive an invite.</p>
-        <button className='btn-primary' onClick={() => setIsPopupOpen(true)}>
-          Request Invite
-        </button>
+        <h1 className='text-4xl mb-2 text-center'>Welcome to Broccoli & Co.</h1>
+        <p className='mb-4 dark:text-gray-400 text-center'>
+          Join us and say goodbye to life&apos;s junk food. Hello, healthy and happy living!
+        </p>
+        <InvitationForm />
       </main>
     </div>
   )

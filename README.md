@@ -1,13 +1,13 @@
 ## TODO
 
 Visual Requirements
-[ ] The UI should occupy the full height of the screen.
-[ ] Shows a fixed header that is always on top of the window and a footer that is always on the bottom of the window (assuming a reasonable window height).
-[ ] The page content is sandwiched in the middle, containing just a heading, a small piece of text and a button to request an invite.
-[ ] A rough mockup of the basic layout is attached. While preserving this layout on desktop, you may style it however you wish, with or without images.
-[ ] The solution must be mobile friendly (users won't need to pinch and zoom on their mobile devices).
+[x] The UI should occupy the full height of the screen.
+[x] Shows a fixed header that is always on top of the window and a footer that is always on the bottom of the window (assuming a reasonable window height).
+[x] The page content is sandwiched in the middle, containing just a heading, a small piece of text and a button to request an invite.
+[x] A rough mockup of the basic layout is attached. While preserving this layout on desktop, you may style it however you wish, with or without images.
+[x] The solution must be mobile friendly (users won't need to pinch and zoom on their mobile devices).
 
-UI Behaviour / Validation
+UI Behaviour / Validation (unit tests)
 [ ] When the Request Invite button is clicked, a popup shows containing the Full name, Email and Confirm Email input fields.
 [ ] The user needs to fill in all three fields to request an invite. Full name needs to be at least 3 characters long, Email needs to be in validation email format and Confirm Email needs to match Email. (You may display the validation errors inline)
 [ ] If the user clicks Send and one or more fields do not validate properly, the app should not contact the backend but instead provide appropriate feedback to the user (use your judgement on what this UX should be).
