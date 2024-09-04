@@ -1,10 +1,13 @@
 'use client'
 
 import InvitationForm from '@/components/invite-form'
+import Footer from '@/components/page-footer'
+import Header from '@/components/page-header'
 
 export default function Home() {
   return (
-    <div className='flex flex-col min-h-screen'>
+    <div data-testid='home-container' className='flex flex-col min-h-screen'>
+      <Header />
       <main className='flex-grow flex flex-col items-center justify-center p-4'>
         <h1 className='text-4xl mb-2 text-center'>Welcome to Broccoli & Co.</h1>
         <p className='mb-4 dark:text-gray-400 text-center'>
@@ -12,6 +15,7 @@ export default function Home() {
         </p>
         <InvitationForm />
       </main>
+      <Footer />
     </div>
   )
 }

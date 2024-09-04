@@ -32,8 +32,8 @@ import { Alert, AlertDescription, AlertTitle } from './ui/alert'
 const formSchema = z
   .object({
     fullName: z.string().min(1, { message: 'Name is required' }).trim(),
-    email: z.string().email({ message: 'Invalid email address' }),
-    confirmEmail: z.string().email({ message: 'Invalid email address' }),
+    email: z.string().email({ message: 'Enter a valid email address' }),
+    confirmEmail: z.string().email({ message: 'Enter a valid confirmation email address' }),
   })
   .superRefine((data, ctx) => {
     if (data.email !== data.confirmEmail) {
@@ -45,12 +45,11 @@ const formSchema = z
     }
   })
 
+type SubmissionResult = { success: boolean; message: string } | null
+
 export default function InvitationForm() {
   const [open, setOpen] = useState(false)
-  const [submissionResult, setSubmissionResult] = useState<{
-    success: boolean
-    message: any
-  } | null>(null)
+  const [submissionResult, setSubmissionResult] = useState<SubmissionResult>(null)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -89,17 +88,7 @@ export default function InvitationForm() {
       </DialogTrigger>
       <DialogContent className='sm:max-w-md'>
         {submissionResult?.success ? (
-          <div>
-            <DialogHeader>
-              <DialogTitle>Registered!</DialogTitle>
-              <DialogDescription>{submissionResult?.message}</DialogDescription>
-            </DialogHeader>
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button variant='secondary'>Close</Button>
-              </DialogClose>
-            </DialogFooter>
-          </div>
+          <SuccessResult submissionResult={submissionResult} />
         ) : (
           <div>
             <DialogHeader className='mb-2'>
@@ -110,13 +99,7 @@ export default function InvitationForm() {
               </DialogDescription>
             </DialogHeader>
 
-            {submissionResult?.success === false && (
-              <Alert variant='destructive' className='mb-2'>
-                <ExclamationTriangleIcon className='h-4 w-4' />
-                <AlertTitle>Oops!</AlertTitle>
-                <AlertDescription>{submissionResult.message}</AlertDescription>
-              </Alert>
-            )}
+            <ErrorResult submissionResult={submissionResult} />
 
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
@@ -171,5 +154,35 @@ export default function InvitationForm() {
         )}
       </DialogContent>
     </Dialog>
+  )
+}
+
+function SuccessResult({ submissionResult }: { submissionResult: SubmissionResult }) {
+  return (
+    <div>
+      <DialogHeader>
+        <DialogTitle>Registered!</DialogTitle>
+        <DialogDescription>{submissionResult?.message}</DialogDescription>
+      </DialogHeader>
+      <DialogFooter>
+        <DialogClose asChild>
+          <Button variant='secondary'>Close</Button>
+        </DialogClose>
+      </DialogFooter>
+    </div>
+  )
+}
+
+function ErrorResult({ submissionResult }: { submissionResult: SubmissionResult }) {
+  return (
+    <>
+      {submissionResult?.success === false && (
+        <Alert variant='destructive' className='mb-2'>
+          <ExclamationTriangleIcon className='h-4 w-4' />
+          <AlertTitle>Oops!</AlertTitle>
+          <AlertDescription>{submissionResult.message}</AlertDescription>
+        </Alert>
+      )}
+    </>
   )
 }
