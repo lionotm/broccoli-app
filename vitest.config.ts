@@ -9,5 +9,6 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './'),
     },
+    include: ['tests/unit/**/*.test.tsx', 'tests/unit/**/*.test.ts'],
   },
 })

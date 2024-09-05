@@ -1,5 +1,3 @@
-'use client'
-
 import InvitationForm from '@/components/invite-form'
 import Footer from '@/components/page-footer'
 import Header from '@/components/page-header'

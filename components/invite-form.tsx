@@ -31,7 +31,7 @@ import { Alert, AlertDescription, AlertTitle } from './ui/alert'
 
 const formSchema = z
   .object({
-    fullName: z.string().min(1, { message: 'Name is required' }).trim(),
+    name: z.string().min(3, { message: 'Name has to be at least 3 characters long' }).trim(),
     email: z.string().email({ message: 'Enter a valid email address' }),
     confirmEmail: z.string().email({ message: 'Enter a valid confirmation email address' }),
   })
@@ -54,7 +54,7 @@ export default function InvitationForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      fullName: '',
+      name: '',
       email: '',
       confirmEmail: '',
     },
@@ -64,8 +64,8 @@ export default function InvitationForm() {
   const submitting = formState.isSubmitting
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const { fullName, email } = values
-    const result = await submitForm({ name: fullName, email })
+    const { name, email } = values
+    const result = await submitForm({ name: name, email })
     setSubmissionResult(result)
     return result
   }
@@ -105,7 +105,7 @@ export default function InvitationForm() {
               <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
                 <FormField
                   control={form.control}
-                  name='fullName'
+                  name='name'
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Full Name</FormLabel>
