@@ -86,7 +86,13 @@ export default function InvitationForm() {
       <DialogTrigger asChild>
         <Button>Request Invite</Button>
       </DialogTrigger>
-      <DialogContent className='sm:max-w-md'>
+      <DialogContent
+        className='sm:max-w-md'
+        onInteractOutside={(event) => {
+          // prevent modal from closing when clicking on the overlay, users might accidentally close the modal on mobile while sending a request
+          event.preventDefault()
+        }}
+      >
         {submissionResult?.success ? (
           <SuccessResult submissionResult={submissionResult} />
         ) : (
